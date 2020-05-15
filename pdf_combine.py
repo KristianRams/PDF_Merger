@@ -8,13 +8,19 @@ from easygui import*
 def combine_pdf() -> bool: 
     arr_of_input_pdfs: List[PdfFileReader] = []
     state: bool = False
+    default_path: str = 'C:\\' 
     while 1:
         if state == False: 
             user_response: str = easygui.buttonbox(msg='Select a PDF to merge', title='PDF Merger', choices=('Select PDF', 'Cancel'))
             if user_response == 'Select PDF':
-                f: str = easygui.fileopenbox()
-                if (f is None): 
-                    sys.exit(1) 
+                f: str = easygui.fileopenbox(default=default_path)
+                if (f is None):
+                    continue 
+                    # sys.exit(1) 
+                ff: str = f.split('\\')
+                ff = ff[:-1] 
+                ff = "\\".join(ff) + "\\"
+                default_path = ff
                 if (f[-4:] != ".pdf"): 
                     print("Error: File selected is not a PDF. Please select a PDF.")
                     continue
@@ -25,9 +31,14 @@ def combine_pdf() -> bool:
         elif state:
             user_response: str = easygui.buttonbox(msg='Select another PDF to merge', title='PDF Merger', choices=('Select another PDF', 'Finish'))
             if user_response == 'Select another PDF':
-                f: str = easygui.fileopenbox()
+                f: str = easygui.fileopenbox(default=default_path)
                 if (f is None): 
-                    sys.exit(1) 
+                    continue
+                    # sys.exit(1) 
+                ff: str = f.split('\\')
+                ff = ff[:-1] 
+                ff = "\\".join(ff) + "\\"
+                default_path = ff
                 if (f[-4:] != ".pdf"): 
                     print("Error: File selected is not a PDF. Please select a PDF.")
                     continue
