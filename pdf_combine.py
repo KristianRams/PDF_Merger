@@ -10,9 +10,9 @@ def combine_pdf() -> bool:
     state: bool = False
     while 1:
         if state == False: 
-            user_response = easygui.buttonbox(msg='Select a PDF to merge', title='PDF Merger', choices=('Select PDF', 'Cancel'))
+            user_response: str = easygui.buttonbox(msg='Select a PDF to merge', title='PDF Merger', choices=('Select PDF', 'Cancel'))
             if user_response == 'Select PDF':
-                f = easygui.fileopenbox()
+                f: str = easygui.fileopenbox()
                 if (f[-4:] != ".pdf"): 
                     print("Error: File selected is not a PDF. Please select a PDF.")
                     continue
@@ -21,9 +21,9 @@ def combine_pdf() -> bool:
             else:
                 sys.exit(1)
         elif state:
-            user_response = easygui.buttonbox(msg='Select another PDF to merge', title='PDF Merger', choices=('Select another PDF', 'Finish'))
+            user_response: str = easygui.buttonbox(msg='Select another PDF to merge', title='PDF Merger', choices=('Select another PDF', 'Finish'))
             if user_response == 'Select another PDF':
-                f = easygui.fileopenbox()
+                f: str = easygui.fileopenbox()
                 if (f[-4:] != ".pdf"): 
                     print("Error: File selected is not a PDF. Please select a PDF.")
                     continue
